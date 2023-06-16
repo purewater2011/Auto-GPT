@@ -10,6 +10,8 @@ from openai.error import APIError, RateLimitError
 from autogpt.config import Config
 from autogpt.logs import logger
 
+from pandora.openai.api import ChatCompletionByGPT
+
 CFG = Config()
 
 openai.api_key = CFG.openai_api_key
@@ -90,7 +92,8 @@ def create_chat_completion(
                     max_tokens=max_tokens,
                 )
             else:
-                response = openai.ChatCompletion.create(
+
+                response = ChatCompletionByGPT.create(
                     model=model,
                     messages=messages,
                     temperature=temperature,
